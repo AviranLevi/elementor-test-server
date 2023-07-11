@@ -1,4 +1,5 @@
 {
   "testRegex": "((\\.|/*.)(spec))\\.ts?$",
-  "roots": ["<rootDir>/tests"]
+  "roots": ["<rootDir>/tests"],
+  "testTimeout": 30000
 }

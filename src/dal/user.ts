@@ -26,7 +26,7 @@ export const getUsersList = async () => {
   }
 };
 
-export const getUserByEmail = async (email: string) => {
+export const getUserByEmail = async (email: string): Promise<IUser> | null => {
   const FUNCTION_NAME = getUserByEmail.name;
   try {
     const user: IUser = await User.findOne({ email }).lean();

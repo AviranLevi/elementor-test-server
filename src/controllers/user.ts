@@ -1,17 +1,10 @@
 import { Request, Response } from 'express';
 import logger from '../logger';
 import { StatusCodes } from '../consts';
-import { createOptionsAndToken } from '../utils';
+import * as utils from '../utils';
 import { COOKIE_NAME } from '../config';
 import * as dal from '../dal';
-import {
-  IUser,
-  ICreateUserRequest,
-  ICreateUserResponse,
-  IGetUserByIdRequest,
-  IGetUserByIdResponse,
-  IUpdateUserByIdRequest
-} from '../types';
+import { IUser, ICreateUserRequest, ICreateUserResponse } from '../types';
 
 const FILE_PATH = 'controllers/user.ts';
 
@@ -32,7 +25,7 @@ export const createUser = async (req: ICreateUserRequest, res: ICreateUserRespon
       loggedIn: true
     };
     const createdUser: IUser = await dal.createUser(dataToDB);
-    const { token, cookieOptions } = await createOptionsAndToken(createdUser._id);
+    const { token, cookieOptions } = await utils.createOptionsAndToken(createdUser._id);
 
     res.cookie(COOKIE_NAME, token, cookieOptions);
     res.status(StatusCodes.CREATED).json({ success: true, data: createdUser });
@@ -50,29 +43,5 @@ export const getUsersList = async (_req: Request, res: Response) => {
   } catch (error: unknown) {
     logger.error(`${FILE_PATH} :: ${FUNCTION_NAME} :: ${error}`);
     res.status(StatusCodes.ERROR).json({ success: false, error });
-  }
-};
-
-export const getUserById = async (req: IGetUserByIdRequest, res: IGetUserByIdResponse) => {
-  const FUNCTION_NAME = getUserById.name;
-  try {
-    const { userId } = req;
-    const user = await dal.getUserById(userId);
-    res.status(StatusCodes.OK).json({ success: true, data: user });
-  } catch (error: unknown) {
-    logger.error(`${FILE_PATH} :: ${FUNCTION_NAME} :: ${error}`);
-    res.status(StatusCodes.ERROR).json({ success: false, error });
-  }
-};
-
-export const updateUserById = async (req: IUpdateUserByIdRequest, res: Response) => {
-  const FUNCTION_NAME = updateUserById.name;
-  try {
-    const { userId, body } = req;
-    const updatedUser: IUser = await dal.updateUserById(userId, body);
-    res.status(StatusCodes.OK).json({ success: true, data: updatedUser });
-  } catch (error: unknown) {
-    logger.error(`${FILE_PATH} :: ${FUNCTION_NAME} :: ${error}`);
-    res.status(StatusCodes.ERROR).json(error);
   }
 };

@@ -2,7 +2,7 @@ import { Response } from 'express';
 import bcrypt from 'bcrypt';
 import logger from '../logger';
 import { StatusCodes } from '../consts';
-import { createOptionsAndToken } from '../utils';
+import * as utils from '../utils';
 import { COOKIE_NAME } from '../config';
 import { IUser, IAuthenticateUserRequest, ILoginUserRequest, ILogoutUserRequest } from '../types';
 import * as dal from '../dal';
@@ -34,7 +34,7 @@ export const loginUser = async (req: ILoginUserRequest, res: Response) => {
       lastLoginTime: new Date().getTime(),
       loginCounter: user.loginCounter + 1
     });
-    const { token, cookieOptions } = await createOptionsAndToken(user._id);
+    const { token, cookieOptions } = await utils.createOptionsAndToken(user._id);
 
     res.cookie(COOKIE_NAME, token, cookieOptions);
     res.status(StatusCodes.OK).json({ success: true, data: user });

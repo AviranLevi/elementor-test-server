@@ -10,4 +10,5 @@ export interface IUser {
   userAgent?: string;
   lastLoginTime?: number;
   updatedAt: number;
+  createdAt: number;
 }
