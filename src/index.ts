@@ -9,8 +9,8 @@ import dotenv from 'dotenv';
 import { loggerMiddleware } from './logger/loggerMiddleware';
 
 const app: Application = express();
-const port: number | string = PORT || 4000;
-const url: string = CONNECTION_STRING || 'mongodb://localhost:27017';
+const port: number | string = PORT;
+const url: string = CONNECTION_STRING;
 dotenv.config();
 
 const options: mongoose.ConnectOptions = {
@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.set('trust proxy', true);
 
-if (DEV) {
+if (true) {
   const corsOptions: CorsOptions = {
     credentials: true,
     origin: ['http://localhost:3000']

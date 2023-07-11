@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { COOKIE_TOKEN_NAME } from '../config';
+import { COOKIE_NAME } from '../config';
 import { StatusCodes } from '../consts';
 import logger from '../logger';
 import { decodeToken } from '../utils';
@@ -7,7 +7,6 @@ import { IUser, ICookieData, IUserAuthenticatorRequest } from '../types';
 import * as dal from '../dal';
 
 const FILE_PATH = 'dal/users.ts';
-const COOKIE_NAME = COOKIE_TOKEN_NAME || 'elementor-cookie';
 const NOT_AUTH_MESSAGE_ERROR = 'User is not authorized!';
 
 export const userAlreadyExistsValidator = async (req: Request, res: Response, next: NextFunction) => {
