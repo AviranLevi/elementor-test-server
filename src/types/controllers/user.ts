@@ -16,21 +16,10 @@ export interface ICreateUserResponse extends Response {
   body: IUser;
 }
 
-export interface ILoginUserRequest extends IUserIdRequestHeaders {
-  body: {
-    email: string;
-    password: string;
-  };
-}
-
 export interface IGetUserByIdRequest extends IUserIdRequestHeaders {}
 
 export interface IGetUserByIdResponse extends Response {
   body: IUser;
 }
 
-export interface IAuthenticateUserRequest extends IUserIdRequestHeaders {}
-
 export interface IUpdateUserByIdRequest extends IUserIdRequestHeaders {}
-
-export interface ILogoutUserRequest extends IUserIdRequestHeaders {}

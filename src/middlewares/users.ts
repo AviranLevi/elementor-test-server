@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { COOKIE_TOKEN_NAME } from '../config';
 import { StatusCodes } from '../consts';
 import logger from '../logger';
-import * as dal from '../dal';
-import { decodeToken, createOptionsAndToken } from '../utils';
+import { decodeToken } from '../utils';
 import { IUser, ICookieData, IUserAuthenticatorRequest } from '../types';
+import * as dal from '../dal';
 
 const FILE_PATH = 'dal/users.ts';
 const COOKIE_NAME = COOKIE_TOKEN_NAME || 'elementor-cookie';

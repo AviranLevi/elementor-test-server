@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.set('trust proxy', true);
 
-if (true) {
+if (DEV) {
   const corsOptions: CorsOptions = {
     credentials: true,
     origin: ['http://localhost:3000']
